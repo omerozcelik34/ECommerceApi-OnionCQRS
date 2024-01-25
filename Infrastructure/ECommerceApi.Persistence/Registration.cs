@@ -1,4 +1,6 @@
-﻿using ECommerceApi.Persistence.Context;
+﻿using ECommerceApi.Application.Interfaces.Repositories;
+using ECommerceApi.Persistence.Context;
+using ECommerceApi.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,8 @@ namespace ECommerceApi.Persistence
         {
             services.AddDbContext<AppDbContext>(opt =>
             opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
         }
     }
 }
