@@ -1,6 +1,8 @@
 ﻿using ECommerceApi.Application.Interfaces.Repositories;
+using ECommerceApi.Application.Interfaces.UnitOfWorks;
 using ECommerceApi.Persistence.Context;
 using ECommerceApi.Persistence.Repositories;
+using ECommerceApi.Persistence.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +23,8 @@ namespace ECommerceApi.Persistence
 
             services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
             services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }
