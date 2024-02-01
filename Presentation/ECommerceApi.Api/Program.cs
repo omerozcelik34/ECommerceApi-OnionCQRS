@@ -1,6 +1,7 @@
 using ECommerceApi.Persistence;
 using ECommerceApi.Application;
 using ECommerceApi.Mapper;
+using ECommerceApi.Application.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.ConfigureExceptionHandlingMiddleware();
 app.UseAuthorization();
 
 app.MapControllers();
