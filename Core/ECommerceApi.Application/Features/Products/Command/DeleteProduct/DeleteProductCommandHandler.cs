@@ -1,6 +1,10 @@
-﻿using ECommerceApi.Application.Interfaces.UnitOfWorks;
+﻿using ECommerceApi.Application.Bases;
+using ECommerceApi.Application.Features.Products.Rules;
+using ECommerceApi.Application.Interfaces.AutoMapper;
+using ECommerceApi.Application.Interfaces.UnitOfWorks;
 using ECommerceApi.Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +13,10 @@ using System.Threading.Tasks;
 
 namespace ECommerceApi.Application.Features.Products.Command.DeleteProduct
 {
-    public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommandRequest, Unit>
+    public class DeleteProductCommandHandler : BaseHandler, IRequestHandler<DeleteProductCommandRequest, Unit>
     {
-        private readonly IUnitOfWork unitOfWork;
-
-        public DeleteProductCommandHandler(IUnitOfWork unitOfWork)
-        {
-            this.unitOfWork = unitOfWork;
+        public DeleteProductCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
+        {         
         }
         public async Task<Unit> Handle(DeleteProductCommandRequest request, CancellationToken cancellationToken)
         {
